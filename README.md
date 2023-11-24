@@ -2,3 +2,88 @@
 Word4Per is an innovative framework for Zero-Shot Composed Person Retrieval (ZS-CPR), integrating visual and textual information for enhanced person identification. This repository includes the Word4Per code and the Image-Text Composed Person Retrieval (ITCPR) dataset, offering new tools for research in security and social applications.
 ### News
 * [2023.11.16] Repo is created. Code and Dataset will come soon.
+
+
+## ITCPR Dataset
+
+### Overview
+
+The **ITCPR** dataset is a comprehensive collection specifically designed for the Zero-Shot Clothes-Person Re-identification (ZS-CPR) task. It consists of a total of **2,225 annotated triplets**, derived from three distinct datasets: Celeb-reID, PRCC, and LAST. 
+
+#### Dataset Scale
+- **Total Annotated Triplets**: 2,225
+- **Unique Query Combinations**: 2,202
+- **Total Images**: 1,151 from Celeb-reID, 146 from PRCC, 905 from LAST
+- **Total Identities**: 512 from Celeb-reID, 146 from PRCC, 541 from LAST
+- **Target Gallery**: 20,510 images with 2,225 corresponding ground truths
+
+### Image Sources
+The images in the ITCPR dataset are sourced from the following datasets:
+- **Celeb-reID**
+- **PRCC**
+- **LAST**
+
+These are utilized solely for testing purposes in the ZS-CPR task.
+
+### Annotation Files
+The dataset includes two annotation files: `query.json` and `gallery.json`.
+
+#### `query.json` Format
+Each entry in the `query.json` file follows this structure:
+```json
+{
+    "file_path": "Celeb-reID/001/1_1_0.jpg",
+    "datasets": "Celeb-reID",
+    "person_id": 1,
+    "instance_id": 1,
+    "caption": "Wearing a brown plaid shirt, black leather shoes, another dark gray T-shirt, another blue jeans"
+}
+```
+- `file_path`: Path relative to the data root directory.
+- `datasets`: Source dataset of the image.
+- `person_id`: Person ID in the original dataset.
+- `instance_id`: Unique identifier for gallery ground truth matching.
+- `caption`: Descriptive caption of the query.
+
+#### `gallery.json` Format
+Each entry in the `gallery.json` file follows this structure:
+```json
+{
+    "file_path": "Celeb-reID/001/1_2_0.jpg",
+    "datasets": "Celeb-reID",
+    "person_id": 1,
+    "instance_id": 1
+}
+```
+- `instance_id`: Matches with `query.json` for target images; -1 for non-matching instances.
+- Others: Correspond to target image path, original dataset, and person ID.
+
+### Data Directory Structure
+```
+data
+|-- Celeb-reID
+|   |-- 001
+|   |-- 002
+|   |-- 003
+|   ...
+|-- PRCC
+|   |-- train
+|   |-- val
+|   |-- test
+|-- LAST
+    |-- 000000
+    |-- 000001
+    |-- 000002
+    ...
+```
+
+### Dataset Download and Preparation
+Download and prepare the datasets as follows:
+
+1. **Celeb-reID**: [GitHub Repository](https://github.com/Huang-3/Celeb-reID)
+2. **PRCC**: [Google Drive Link](https://drive.google.com/file/d/1yTYawRm4ap3M-j0PjLQJ--xmZHseFDLz/view?usp=sharing)
+3. **LAST**: [GitHub Repository](https://github.com/shuxjweb/last)
+
+After downloading, use the `img_process.py` script to process Celeb-reID and LAST datasets into the standard format. The PRCC dataset can be directly placed in the corresponding directory upon extraction.
+
+---
