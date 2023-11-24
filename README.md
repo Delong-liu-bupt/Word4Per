@@ -39,11 +39,11 @@ Each entry in the `query.json` file follows this structure:
     "caption": "Wearing a brown plaid shirt, black leather shoes, another dark gray T-shirt, another blue jeans"
 }
 ```
-- `file_path`: Path relative to the data root directory.
+- `file_path`: Reference image path relative to the data root directory.
 - `datasets`: Source dataset of the image.
 - `person_id`: Person ID in the original dataset.
 - `instance_id`: Unique identifier for gallery ground truth matching.
-- `caption`: Descriptive caption of the query.
+- `caption`: Relative caption of the reference image.
 
 #### `gallery.json` Format
 Each entry in the `gallery.json` file follows this structure:
@@ -55,7 +55,7 @@ Each entry in the `gallery.json` file follows this structure:
     "instance_id": 1
 }
 ```
-- `instance_id`: Matches with `query.json` for target images; -1 for non-matching instances.
+- `instance_id`: Matches with `query.json` for target images; -1 for non-matching query instances.
 - Others: Correspond to target image path, original dataset, and person ID.
 
 ### Data Directory Structure
