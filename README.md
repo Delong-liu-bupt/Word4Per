@@ -89,16 +89,12 @@ Download and prepare the datasets as follows:
 
 After downloading, use the `img_process.py` script to process Celeb-reID and LAST datasets into the standard format. The PRCC dataset can be directly placed in the corresponding directory upon extraction.
 
----
-Sure, here's a simplified version of the acknowledgment and citation section for your GitHub page using Markdown format:
-
----
 
 ## Acknowledgments
 
 We are deeply thankful to the creators of the Celebrities-ReID, PRCC, and LAST datasets for their significant contributions to the field of person re-identification. Their commitment to open-sourcing these valuable resources has greatly facilitated advancements in academic and practical research.
-
+---
 - **Celebrities-ReID**: "Celebrities-ReID: A Benchmark for Clothes Variation in Long-Term Person Re-Identification" - [View Paper](https://ieeexplore.ieee.org/document/8851957)
 - **PRCC**: "Person Re-identification by Contour Sketch under Moderate Clothing Change" - [View Paper](https://arxiv.org/abs/2002.02295)
 - **LAST**: "Large-Scale Spatio-Temporal Person Re-identification: Algorithms and Benchmark" - [View Paper](https://arxiv.org/abs/2105.15076)
-
+---
