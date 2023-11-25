@@ -2,8 +2,7 @@
 Word4Per is an innovative framework for Zero-Shot Composed Person Retrieval (ZS-CPR), integrating visual and textual information for enhanced person identification. This repository includes the Word4Per code and the Image-Text Composed Person Retrieval (ITCPR) dataset, offering new tools for research in security and social applications.
 ### News
 * [2023.11.16] Repo is created. Code and Dataset will come soon.
-
-
+* [2023.11.25] The TICPR dataset is now publicly available for download.
 
 
 
@@ -74,10 +73,13 @@ data
 |   |-- val
 |   |-- test
 |-- LAST
-    |-- 000000
-    |-- 000001
-    |-- 000002
-    ...
+|   |-- 000000
+|   |-- 000001
+|   |-- 000002
+|   ...
+|-- query.json
+|-- gallery.json
+
 ```
 
 ### Dataset Download and Preparation
