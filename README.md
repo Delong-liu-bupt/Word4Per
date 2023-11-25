@@ -11,7 +11,7 @@ Word4Per is an innovative framework for Zero-Shot Composed Person Retrieval (ZS-
 
 ### Overview
 
-The **ITCPR** dataset is a comprehensive collection specifically designed for the Zero-Shot Clothes-Person Re-identification (ZS-CPR) task. It consists of a total of **2,225 annotated triplets**, derived from three distinct datasets: Celeb-reID, PRCC, and LAST. 
+The **ITCPR** dataset is a comprehensive collection specifically designed for the Zero-Shot Clothes-Person Re-identification (ZS-CPR) task. It consists of a total of **2,225 annotated triplets**, derived from three distinct datasets: Celeb-reID, PRCC, and LAST. To access the TICPR dataset, please use the following download link: [TICPR Dataset Download](https://drive.google.com/file/d/1KPKQ3DGK3h7TvhD3R1CgkQa1LTP_sjWm/view?usp=sharing). 
 
 #### Dataset Scale
 - **Total Annotated Triplets**: 2,225
