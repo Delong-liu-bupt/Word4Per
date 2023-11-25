@@ -89,7 +89,7 @@ Download and prepare the datasets as follows:
 2. **PRCC**: [Google Drive Link](https://drive.google.com/file/d/1yTYawRm4ap3M-j0PjLQJ--xmZHseFDLz/view?usp=sharing)
 3. **LAST**: [GitHub Repository](https://github.com/shuxjweb/last)
 
-After downloading, use the `img_process.py` script to process Celeb-reID and LAST datasets into the standard format. The PRCC dataset can be directly placed in the corresponding directory upon extraction.
+After downloading, use the `img_process.py` script to process Celeb-reID and LAST datasets into the standard format. The PRCC (subfolder PRCC/rgb) dataset can be directly placed in the corresponding directory upon extraction.
 
 ### Acknowledgments
 We are deeply thankful to the creators of the Celebrities-ReID, PRCC, and LAST datasets for their significant contributions to the field of person re-identification. Their commitment to open-sourcing these valuable resources has greatly facilitated advancements in academic and practical research.
