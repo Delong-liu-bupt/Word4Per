@@ -1,8 +1,8 @@
 # Word for Person: Zero-shot Composed Person Retrieval (Word4Per)
-Word4Per is an innovative framework for Zero-Shot Composed Person Retrieval (ZS-CPR), integrating visual and textual information for enhanced person identification. This repository includes the Word4Per code and the Image-Text Composed Person Retrieval (ITCPR) dataset, offering new tools for research in security and social applications.
+Word4Per is an innovative framework for Zero-Shot Composed Person Retrieval (ZS-CPR), integrating visual and textual information for enhancing person identification. This repository includes the Word4Per code and the Image-Text Composed Person Retrieval (ITCPR) dataset, offering new tools for research in security and social applications.
 ### News
 * [2023.11.16] Repo is created. Code and Dataset will come soon.
-* [2023.11.25] The TICPR dataset is now publicly available for download.
+* [2023.11.25] The ITCPR dataset is now publicly available for download.
 
 
 
@@ -10,7 +10,7 @@ Word4Per is an innovative framework for Zero-Shot Composed Person Retrieval (ZS-
 
 ### Overview
 
-The **ITCPR** dataset is a comprehensive collection specifically designed for the Zero-Shot Clothes-Person Re-identification (ZS-CPR) task. It consists of a total of **2,225 annotated triplets**, derived from three distinct datasets: Celeb-reID, PRCC, and LAST. To access the TICPR dataset, please use the following download link: [TICPR Dataset Download](https://drive.google.com/file/d/1KPKQ3DGK3h7TvhD3R1CgkQa1LTP_sjWm/view?usp=sharing). 
+The **ITCPR** dataset is a comprehensive collection specifically designed for the Zero-Shot Composed Person Retrieval (ZS-CPR) task. It consists of a total of **2,225 annotated triplets**, derived from three distinct datasets: Celeb-reID, PRCC, and LAST. To access the ITCPR dataset, please use the following download link: [ITCPR Dataset Download](https://drive.google.com/file/d/1KPKQ3DGK3h7TvhD3R1CgkQa1LTP_sjWm/view?usp=sharing). 
 
 #### Dataset Scale
 - **Total Annotated Triplets**: 2,225
