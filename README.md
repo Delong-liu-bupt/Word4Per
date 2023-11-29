@@ -1,4 +1,6 @@
 # Word for Person: Zero-shot Composed Person Retrieval (Word4Per)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/word-for-person-zero-shot-composed-person/zero-shot-composed-person-retrieval-on-itcpr)](https://paperswithcode.com/sota/zero-shot-composed-person-retrieval-on-itcpr?p=word-for-person-zero-shot-composed-person)
+
 Word4Per is an innovative framework for Zero-Shot Composed Person Retrieval (ZS-CPR), integrating visual and textual information for enhancing person identification. This repository includes the Word4Per code and the Image-Text Composed Person Retrieval (ITCPR) dataset, offering new tools for research in security and social applications.
 ### News
 * [2023.11.16] Repo is created. Code and Dataset will come soon.
@@ -99,3 +101,19 @@ We are deeply thankful to the creators of the Celebrities-ReID, PRCC, and LAST d
 - **PRCC**: "Person Re-identification by Contour Sketch under Moderate Clothing Change" - [View Paper](https://arxiv.org/abs/2002.02295)
 - **LAST**: "Large-Scale Spatio-Temporal Person Re-identification: Algorithms and Benchmark" - [View Paper](https://arxiv.org/abs/2105.15076)
 ---
+Certainly! You can use the following Markdown paragraph for your GitHub repository to instruct users to cite your paper if they utilize your code and dataset. Here's how you can format it:
+
+
+## Citation
+If you use our code or dataset in your research, please cite our paper as follows:
+
+```
+@misc{liu2023word,
+  title={Word for Person: Zero-shot Composed Person Retrieval},
+  author={Delong Liu and Haiwen Li and Zhicheng Zhao and Fei Su and Hongying Meng},
+  year={2023},
+  eprint={2311.16515},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
+}
+```
