@@ -66,6 +66,12 @@ Each entry in the `gallery.json` file follows this structure:
 ### Data Directory Structure
 ```
 data
+|-- CUHK-PEDES
+|   |-- imgs
+|       |-- cam_a
+|       |-- cam_b
+|       |-- ...
+|   |-- reid_raw.json
 |-- Celeb-reID
 |   |-- 001
 |   |-- 002
@@ -91,6 +97,7 @@ Download and prepare the datasets as follows:
 1. **Celeb-reID**: [GitHub Repository](https://github.com/Huang-3/Celeb-reID)
 2. **PRCC**: [Google Drive Link](https://drive.google.com/file/d/1yTYawRm4ap3M-j0PjLQJ--xmZHseFDLz/view?usp=sharing)
 3. **LAST**: [GitHub Repository](https://github.com/shuxjweb/last)
+4. **CUHK-PEDES**: [GitHub Repository](https://github.com/ShuangLI59/Person-Search-with-Natural-Language-Description)
 
 After downloading, use the `img_process.py` script to process Celeb-reID and LAST datasets into the standard format. The PRCC (subfolder PRCC/rgb) dataset can be directly placed in the corresponding directory upon extraction.
 
@@ -103,6 +110,55 @@ We are deeply thankful to the creators of the Celebrities-ReID, PRCC, and LAST d
 - **LAST**: "Large-Scale Spatio-Temporal Person Re-identification: Algorithms and Benchmark" - [View Paper](https://arxiv.org/abs/2105.15076)
 ---
 Certainly! You can use the following Markdown paragraph for your GitHub repository to instruct users to cite your paper if they utilize your code and dataset. Here's how you can format it:
+
+## Word4Per Codes
+
+### Training
+**Stage 1: Fine-tuning of CLIP Network**
+```bash
+python train_stage1.py \
+--name word4per_stage1 \
+--root_dir 'your_data_path' \
+--img_aug \
+--batch_size 64 \
+--MLM \
+--dataset_name $DATASET_NAME \
+--loss_names 'sdm+id' \
+--num_epoch 60
+```
+
+**Stage 2: Learning the Textual Inversion Network**
+```bash
+python train_stage2.py \
+--name word4per_stage2 \
+--root_dir 'your_data_path' \
+--img_aug \
+--batch_size 128 \
+--lr 1e-4 \
+--optimizer AdamW \
+--dataset_name $DATASET_NAME \
+--loss_names 'sdm+id' \
+--toword_loss 'text' \
+--num_epoch 60
+```
+
+### Testing
+**Stage 1:**
+```bash
+python test_stage1.py --config_file 'path/to/model_dir/configs.yaml'
+```
+
+**Stage 2:**
+1. 
+```bash
+python test_word4per.py --config_file 'path/to/model_dir/configs.yaml'
+```
+2.
+```bash
+python test_fuse_w4p.py --config_file 'path/to/model_dir/configs.yaml' --model2_file 'path/to/second_model_dir/best.pth'
+```
+
+### Acknowledgments
 
 
 ## Citation
