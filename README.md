@@ -126,6 +126,7 @@ python train_stage1.py \
 --loss_names 'sdm+id' \
 --num_epoch 60
 ```
+[Click here to download the Word4per Stage1 model](https://pan.baidu.com/s/12GvVP1yxyiLBe2mODQU6fw) with the extraction code: akpa.
 
 **Stage 2: Learning the Textual Inversion Network**
 ```bash
