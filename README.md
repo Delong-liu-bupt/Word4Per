@@ -166,15 +166,10 @@ python test_fuse_w4p.py --config_file 'path/to/model_dir/configs.yaml' --model2_
 If you use our code or dataset in your research, please cite our paper as follows:
 
 ```
-@article{LIU2025107028,
-title = {Text-guided Image Restoration and Semantic Enhancement for Text-to-Image Person Retrieval},
-journal = {Neural Networks},
-volume = {184},
-pages = {107028},
-year = {2025},
-issn = {0893-6080},
-doi = {https://doi.org/10.1016/j.neunet.2024.107028},
-url = {https://www.sciencedirect.com/science/article/pii/S0893608024009572},
-author = {Delong Liu and Haiwen Li and Zhicheng Zhao and Yuan Dong}
+@article{liu2023word,
+  title={Word for Person: Zero-shot Composed Person Retrieval},
+  author={Liu, Delong and Li, Haiwen and Zhao, Zhicheng and Su, Fei and Meng, Hongying},
+  journal={arXiv preprint arXiv:2311.16515},
+  year={2023}
 }
 ```
