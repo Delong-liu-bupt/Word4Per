@@ -150,11 +150,11 @@ python test_stage1.py --config_file 'path/to/model_dir/configs.yaml'
 ```
 
 **Stage 2:**
-1. 
+1. Inference of a single model.
 ```bash
 python test_word4per.py --config_file 'path/to/model_dir/configs.yaml'
 ```
-2.
+2. Fusion inference of two models.
 ```bash
 python test_fuse_w4p.py --config_file 'path/to/model_dir/configs.yaml' --model2_file 'path/to/second_model_dir/best.pth'
 ```
