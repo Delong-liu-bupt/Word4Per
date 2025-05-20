@@ -172,7 +172,7 @@ def build_dataloader(args, tranforms=None):
 
 def build_dataloader_toword(args, tranforms=None):
     num_workers = args.num_workers
-    dataset = __factory['ComReid'](root='/data1')
+    dataset = __factory['ComReid'](root=args.root_dir)
     # num_classes = len(dataset.train_id_container)
 
     # build dataloader for testing

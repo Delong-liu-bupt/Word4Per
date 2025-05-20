@@ -102,6 +102,8 @@ class Evaluator():
         return t2i_cmc[0]
 
 
+
+
 class Evaluator_toword():
     def __init__(self, test_query_loader, test_gallery_loader):
         self.query_loader = test_query_loader # query

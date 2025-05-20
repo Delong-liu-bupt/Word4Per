@@ -151,7 +151,6 @@ def do_train_toword(start_epoch, args, model, img2text, train_loader, evaluator,
         for param in model.parameters():
             param.requires_grad = False
         model.eval()
-        
         img2text.train()
 
 
@@ -162,6 +161,7 @@ def do_train_toword(start_epoch, args, model, img2text, train_loader, evaluator,
             caption_ids = batch['caption_ids']
 
             person_ids = batch['pids']
+
             image_feats, text_feats = model.base_model(images, caption_ids)
             i_feats = image_feats[:, 0, :].float()
             t_feats = text_feats[torch.arange(text_feats.shape[0]), caption_ids.argmax(dim=-1)].float()
@@ -197,6 +197,10 @@ def do_train_toword(start_epoch, args, model, img2text, train_loader, evaluator,
                 meters['text_loss'].update(text_loss.item(), batch_size)
                 meters['img_loss'].update(img_loss.item(), batch_size)
 
+            # print(token_features.shape,text_features.shape)
+            # print(i_feats.shape,t_feats.shape)
+            # print(text_loss,img_loss,total_loss)
+        
             optimizer.zero_grad()
             total_loss.backward()
             optimizer.step()
@@ -210,6 +214,8 @@ def do_train_toword(start_epoch, args, model, img2text, train_loader, evaluator,
                         info_str += f", {k}: {v.avg:.4f}"
                 info_str += f", Base Lr: {scheduler.get_lr()[0]:.2e}"
                 logger.info(info_str)
+
+            # sys.exit(0)
         
         tb_writer.add_scalar('lr', scheduler.get_lr()[0], epoch)
         tb_writer.add_scalar('temperature', args.temperature, epoch)
@@ -226,6 +232,9 @@ def do_train_toword(start_epoch, args, model, img2text, train_loader, evaluator,
                 "Epoch {} done. Time per batch: {:.3f}[s] Speed: {:.1f}[samples/s]"
                 .format(epoch, time_per_batch,
                         train_loader.batch_size / time_per_batch))
+        
+        # arguments["epoch"] = epoch
+        # checkpointer.save("best", **arguments)
         
         if epoch % eval_period == 0:
             if get_rank() == 0:

@@ -82,9 +82,9 @@ if __name__ == '__main__':
     model.to(device)
     img2text.to(device)
     if 'ViT-L' in args.pretrain_choice:
-        base_model_path = '/data1/Com_ReID/model/base_model.pth'
+        base_model_path = './models/stage1_model_vitl.pth'
     elif 'ViT-B' in args.pretrain_choice:
-        base_model_path = '/data1/Com_ReID/model/base_model_vitb.pth'
+        base_model_path = './models/stage1_model_vitb.pth'
     base_model = torch.load(base_model_path, map_location='cuda')
     sd_model = base_model['model']
     model.load_state_dict(sd_model, strict=False)

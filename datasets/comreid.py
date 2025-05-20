@@ -14,11 +14,10 @@ class ComReid(BaseDataset):
     URL: https://openaccess.thecvf.com/content_cvpr_2017/html/Li_Person_Search_With_CVPR_2017_paper.html
 
     """
-    dataset_dir = 'Com_ReID'
 
-    def __init__(self, root='/data0/ldl', verbose=True):
+    def __init__(self, root='/data0', verbose=True):
         super(ComReid, self).__init__()
-        self.dataset_dir = op.join(root, self.dataset_dir)
+        self.dataset_dir = root
         self.img_dir = self.dataset_dir
 
         self.query_path = op.join(self.dataset_dir, 'query.json')
@@ -45,11 +44,11 @@ class ComReid(BaseDataset):
         # TODO use prettytable print comand line table
 
         self.logger.info(f"{self.__class__.__name__} Dataset statistics:")
-        table = PrettyTable(['subset', 'iids', 'images'])
+        table = PrettyTable(['subset', 'pids', 'iids', 'images'])
         table.add_row(
-            ['query', num_query_iids, num_query_imgs])
+            ['query', num_query_pids, num_query_iids, num_query_imgs])
         table.add_row(
-            ['gallery', num_gallery_iids, num_gallery_imgs])
+            ['gallery', num_gallery_pids, num_gallery_iids, num_gallery_imgs])
         self.logger.info('\n' + str(table))
 
 

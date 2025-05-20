@@ -15,12 +15,49 @@ class Word4Per(nn.Module):
 
         self.base_model, base_cfg = build_CLIP_from_openai_pretrained(args.pretrain_choice, args.img_size, args.stride_size)
         self.embed_dim = base_cfg['embed_dim']
+
         self.logit_scale = torch.ones([]) * (1 / args.temperature) 
 
         if 'id' in args.loss_names:
             self.classifier = nn.Linear(self.embed_dim, self.num_classes)
             nn.init.normal_(self.classifier.weight.data, std=0.001)
             nn.init.constant_(self.classifier.bias.data, val=0.0)
+
+        if 'mlm' in args.loss_names:
+            self.cross_attn = nn.MultiheadAttention(self.embed_dim,
+                                                    self.embed_dim // 64,
+                                                    batch_first=True)
+            self.cross_modal_transformer = Transformer(width=self.embed_dim,
+                                                       layers=args.cmt_depth,
+                                                       heads=self.embed_dim //
+                                                       64)
+            scale = self.cross_modal_transformer.width**-0.5
+            
+            self.ln_pre_t = LayerNorm(self.embed_dim)
+            self.ln_pre_i = LayerNorm(self.embed_dim)
+            self.ln_post = LayerNorm(self.embed_dim)
+
+            proj_std = scale * ((2 * self.cross_modal_transformer.layers)**-0.5)
+            attn_std = scale
+            fc_std = (2 * self.cross_modal_transformer.width)**-0.5
+            for block in self.cross_modal_transformer.resblocks:
+                nn.init.normal_(block.attn.in_proj_weight, std=attn_std)
+                nn.init.normal_(block.attn.out_proj.weight, std=proj_std)
+                nn.init.normal_(block.mlp.c_fc.weight, std=fc_std)
+                nn.init.normal_(block.mlp.c_proj.weight, std=proj_std)
+
+            # init cross attn
+            nn.init.normal_(self.cross_attn.in_proj_weight, std=attn_std)
+            nn.init.normal_(self.cross_attn.out_proj.weight, std=proj_std)
+
+            self.mlm_head = nn.Sequential(
+                OrderedDict([('dense', nn.Linear(self.embed_dim, self.embed_dim)),
+                            ('gelu', QuickGELU()),
+                            ('ln', LayerNorm(self.embed_dim)),
+                            ('fc', nn.Linear(self.embed_dim, args.vocab_size))]))
+            # init mlm head
+            nn.init.normal_(self.mlm_head.dense.weight, std=fc_std)
+            nn.init.normal_(self.mlm_head.fc.weight, std=proj_std)
 
     def _set_task(self):
         loss_names = self.args.loss_names
@@ -96,6 +133,24 @@ class Word4Per(nn.Module):
             text_precision = (text_pred == batch['pids']).float().mean()
             ret.update({'img_acc': image_precision})
             ret.update({'txt_acc': text_precision})
+        
+        if 'mlm' in self.current_task:
+            mlm_ids = batch['mlm_ids']
+
+            mlm_feats = self.base_model.encode_text(mlm_ids)
+
+            x = self.cross_former(mlm_feats, image_feats, image_feats)
+
+            x = self.mlm_head(x)  # [batch_size, text_len, num_colors]
+
+            scores = x.float().reshape(-1, self.args.vocab_size)
+            mlm_labels = batch['mlm_labels'].reshape(-1)
+            ret.update({'mlm_loss': objectives.compute_mlm(scores, mlm_labels)*self.args.mlm_loss_weight})
+
+            pred = scores.max(1)[1]
+            mlm_label_idx = torch.nonzero(mlm_labels)
+            acc = (pred[mlm_label_idx] == mlm_labels[mlm_label_idx]).float().mean()
+            ret.update({'mlm_acc': acc})
 
         return ret
 

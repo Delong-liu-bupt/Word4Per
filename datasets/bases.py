@@ -196,7 +196,7 @@ class ImageTextMLMDataset(Dataset):
         caption_tokens = tokenize(caption, tokenizer=self.tokenizer, text_length=self.text_length, truncate=self.truncate)
         
         #.clone()
-        mlm_tokens, mlm_labels = self._build_random_masked_tokens_and_labels(caption_tokens.copy().cpu().numpy())
+        mlm_tokens, mlm_labels = self._build_random_masked_tokens_and_labels(caption_tokens.clone().cpu().numpy())
         ret = {
             'pids': pid,
             'image_ids': image_id,
