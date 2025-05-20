@@ -1,23 +1,13 @@
-# Composed Person Retrieval and the ITCPR Benchmark
-
+# Word for Person: Zero-shot Composed Person Retrieval (Word4Per)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/word-for-person-zero-shot-composed-person/zero-shot-composed-person-retrieval-on-itcpr)](https://paperswithcode.com/sota/zero-shot-composed-person-retrieval-on-itcpr?p=word-for-person-zero-shot-composed-person)
 [![arXiv](https://img.shields.io/badge/Arxiv-2311.16515-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2311.16515)
 
-## News
+Word4Per is an innovative framework for Zero-Shot Composed Person Retrieval (ZS-CPR), integrating visual and textual information for enhancing person identification. This repository includes the Word4Per code and the Image-Text Composed Person Retrieval (ITCPR) dataset, offering new tools for research in security and social applications.
+### News
+* [2023.11.16] Repo is created. Code and Dataset will come soon.
+* [2023.11.25] The ITCPR dataset is now publicly available for download.
 
-* **2023.11.16:** Repository created. Code and dataset coming soon.
-* **2023.11.25:** ITCPR dataset publicly available for download.
-* **2025.05.20:** The previous training and testing code has been updated and is now located in the 'old_project' folder. The new code and data will be open-sourced soon.
----
 
-## Introduction: Composed Person Retrieval (CPR)
-
-Composed Person Retrieval (CPR) is a new cross-modal retrieval task that aims to identify individuals in large-scale person image databases by combining **both a reference image and a textual description** as the query. This task is inspired by real-world needs, such as searching for a missing person using an old photograph and a new verbal description, and it bridges the gap left by traditional retrieval methods that rely on either image-only or text-only queries.
-
-### Why CPR?
-
-* **Limitations of Existing Methods:** Image-based and text-based retrieval each leverage only one modality, missing out on richer, complementary information available in real scenarios.
-* **CPR Definition:** In CPR, each query consists of a *reference image* and a *relative caption* describing differences or changes (e.g., clothes, appearance). The goal is to retrieve the target image(s) of the same identity that best match the combined query.
 
 ## ITCPR Dataset
 
@@ -76,6 +66,12 @@ Each entry in the `gallery.json` file follows this structure:
 ### Data Directory Structure
 ```
 data
+|-- CUHK-PEDES
+|   |-- imgs
+|       |-- cam_a
+|       |-- cam_b
+|       |-- ...
+|   |-- reid_raw.json
 |-- Celeb-reID
 |   |-- 001
 |   |-- 002
@@ -101,6 +97,7 @@ Download and prepare the datasets as follows:
 1. **Celeb-reID**: [GitHub Repository](https://github.com/Huang-3/Celeb-reID)
 2. **PRCC**: [Google Drive Link](https://drive.google.com/file/d/1yTYawRm4ap3M-j0PjLQJ--xmZHseFDLz/view?usp=sharing)
 3. **LAST**: [GitHub Repository](https://github.com/shuxjweb/last)
+4. **CUHK-PEDES**: [GitHub Repository](https://github.com/ShuangLI59/Person-Search-with-Natural-Language-Description)
 
 After downloading, use the `img_process.py` script to process Celeb-reID and LAST datasets into the standard format. The PRCC (subfolder PRCC/rgb) dataset can be directly placed in the corresponding directory upon extraction.
 
@@ -112,20 +109,63 @@ We are deeply thankful to the creators of the Celebrities-ReID, PRCC, and LAST d
 - **PRCC**: "Person Re-identification by Contour Sketch under Moderate Clothing Change" - [View Paper](https://arxiv.org/abs/2002.02295)
 - **LAST**: "Large-Scale Spatio-Temporal Person Re-identification: Algorithms and Benchmark" - [View Paper](https://arxiv.org/abs/2105.15076)
 ---
-## Codes
+Certainly! You can use the following Markdown paragraph for your GitHub repository to instruct users to cite your paper if they utilize your code and dataset. Here's how you can format it:
 
-1. **Initial Solution: Inversion-Based Approach**
-   Our initial attempt to address the composed person retrieval problem was based on an inversion-based solution. All related code and scripts implementing this method have now been migrated to the `old_project` folder for archival and reference (See `old_project/README.md`).
+## Word4Per Codes
 
-2. **Current Solution: Scalable Synthetic Data and FAFA Framework**
-   Building on our research insights, we have developed a new, scalable pipeline for automatic generation of synthetic CPR data, as described in our latest work. This pipeline utilizes large language models to generate diverse textual quadruples, fine-tuned generative models for identity-consistent image synthesis, and multimodal filtering to ensure data quality. On top of this data, we propose the Fine-grained Adaptive Feature Alignment (FAFA) framework, which enhances retrieval performance through fine-grained dynamic alignment and masked feature reasoning.
-   **All new code, scripts, and the latest synthetic dataset will be released under the `FAFA_SynCPR` directory.**
+### Training
+**Stage 1: Fine-tuning of CLIP Network**
+```bash
+python train_stage1.py \
+--name word4per_stage1 \
+--root_dir 'your_data_path' \
+--img_aug \
+--batch_size 64 \
+--MLM \
+--dataset_name $DATASET_NAME \
+--loss_names 'sdm+id' \
+--num_epoch 60
+```
+[Click here to download the Word4per Stage1 model](https://pan.baidu.com/s/12GvVP1yxyiLBe2mODQU6fw) with the extraction code: akpa.
+
+**Stage 2: Learning the Textual Inversion Network**
+```bash
+python train_stage2.py \
+--name word4per_stage2 \
+--root_dir 'your_data_path' \
+--img_aug \
+--batch_size 128 \
+--lr 1e-4 \
+--optimizer AdamW \
+--dataset_name $DATASET_NAME \
+--loss_names 'sdm+id' \
+--toword_loss 'text' \
+--num_epoch 60
+```
+
+### Testing
+**Stage 1:**
+```bash
+python test_stage1.py --config_file 'path/to/model_dir/configs.yaml'
+```
+
+**Stage 2:**
+1. Inference of a single model.
+```bash
+python test_word4per.py --config_file 'path/to/model_dir/configs.yaml'
+```
+2. Fusion inference of two models.
+```bash
+python test_fuse_w4p.py --config_file 'path/to/model_dir/configs.yaml' --model2_file 'path/to/second_model_dir/best.pth'
+```
+
+### Acknowledgments
+
 
 ## Citation
+If you use our code or dataset in your research, please cite our paper as follows:
 
-If you use our code or dataset, please cite:
-
-```bibtex
+```
 @article{liu2023word,
   title={Word for Person: Zero-shot Composed Person Retrieval},
   author={Liu, Delong and Li, Haiwen and Zhao, Zhicheng and Su, Fei and Meng, Hongying},
