@@ -159,17 +159,18 @@ python test_word4per.py --config_file 'path/to/model_dir/configs.yaml'
 python test_fuse_w4p.py --config_file 'path/to/model_dir/configs.yaml' --model2_file 'path/to/second_model_dir/best.pth'
 ```
 
-### Acknowledgments
-
-
 ## Citation
 If you use our code or dataset in your research, please cite our paper as follows:
+(This version of the code needs to refer to versions v1–v3 of the corresponding arXiv paper, rather than the latest version.)
 
 ```
-@article{liu2023word,
-  title={Word for Person: Zero-shot Composed Person Retrieval},
-  author={Liu, Delong and Li, Haiwen and Zhao, Zhicheng and Su, Fei and Meng, Hongying},
-  journal={arXiv preprint arXiv:2311.16515},
-  year={2023}
+@misc{liu2025automaticsyntheticdatafinegrained,
+      title={Automatic Synthetic Data and Fine-grained Adaptive Feature Alignment for Composed Person Retrieval}, 
+      author={Delong Liu and Haiwen Li and Zhaohui Hou and Zhicheng Zhao and Fei Su and Yuan Dong},
+      year={2025},
+      eprint={2311.16515},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2311.16515}, 
 }
 ```
