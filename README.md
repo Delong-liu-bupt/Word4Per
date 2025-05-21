@@ -126,10 +126,13 @@ We are deeply thankful to the creators of the Celebrities-ReID, PRCC, and LAST d
 If you use our code or dataset, please cite:
 
 ```bibtex
-@article{liu2023word,
-  title={Word for Person: Zero-shot Composed Person Retrieval},
-  author={Liu, Delong and Li, Haiwen and Zhao, Zhicheng and Su, Fei and Meng, Hongying},
-  journal={arXiv preprint arXiv:2311.16515},
-  year={2023}
+@misc{liu2025automaticsyntheticdatafinegrained,
+      title={Automatic Synthetic Data and Fine-grained Adaptive Feature Alignment for Composed Person Retrieval}, 
+      author={Delong Liu and Haiwen Li and Zhaohui Hou and Zhicheng Zhao and Fei Su and Yuan Dong},
+      year={2025},
+      eprint={2311.16515},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2311.16515}, 
 }
 ```
