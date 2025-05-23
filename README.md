@@ -2,6 +2,8 @@
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/word-for-person-zero-shot-composed-person/zero-shot-composed-person-retrieval-on-itcpr)](https://paperswithcode.com/sota/zero-shot-composed-person-retrieval-on-itcpr?p=word-for-person-zero-shot-composed-person)
 [![arXiv](https://img.shields.io/badge/Arxiv-2311.16515-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2311.16515)
+[![Hugging Face](https://img.shields.io/badge/HuggingFace-ITCPR-yellow?logo=huggingface)](https://huggingface.co/datasets/a1557811266/ITCPR)
+
 
 ## News
 
