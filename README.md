@@ -10,6 +10,7 @@
 * **2023.11.16:** Repository created. Code and dataset coming soon.
 * **2023.11.25:** ITCPR dataset publicly available for download.
 * **2025.05.20:** The previous training and testing code has been updated and is now located in the 'old_project' folder. The new code and data will be open-sourced soon.
+* **2025.05.26:** SynCPR dataset publicly available for download.
 ---
 
 ## Introduction: Composed Person Retrieval (CPR)
